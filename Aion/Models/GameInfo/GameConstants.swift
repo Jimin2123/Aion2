@@ -15,14 +15,18 @@ struct GameConstants {
     static let membershipPrice: Int = 45_000 // 맴버쉽 구독 가격 (45000원)
     static let membershipEnergyPrice: Int = 100_000 // 멤버쉽 에너지 (10만 키나)
     
-    // MARK: - 오드에너지 제작, 구매 횟수
+    
+    // MARK: - 오드에너지 제작, 구매 (횟수, 충전량)
     static let maxMembershipBuyEnergy: Int = 7 // 에너지 최대 구매 횟수
+    static let membershipEnergyRechargeAmount: Int = 40 // 멤버쉽 구매 시 충전량
     static let maxMorphExchangeEnergy: Int = 7 // 에너지 최대 제작 횟수
+    static let morphEnergyRechargeAmount: Int = 40 // 제작 시 충전량
+    
     
     // MARK: - 던전 에너지 사용량
-    static let eDungeonEnergyCost = 30 // 탐험 던전 에너지 사용량
-    static let cDungeonEnergyCost = 40 // 정복 던전 에너지 사용량
-    static let tDungeonEnergyCost = 40 // 초월 던전 에너지 사용량
+    static let eDungeonEnergyCost: Int = 30 // 탐험 던전 에너지 사용량
+    static let cDungeonEnergyCost: Int = 40 // 정복 던전 에너지 사용량
+    static let tDungeonEnergyCost: Int = 40 // 초월 던전 에너지 사용량
     
     // MARK: - 오드 에너지 : 05시 기준 (3시간 간격)
     static let energyRechargeHour: Int = 3
