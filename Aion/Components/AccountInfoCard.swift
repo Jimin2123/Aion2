@@ -23,7 +23,7 @@ struct AccountInfoCard: View {
             
             Divider()
             
-            HStack(spacing: 20) {
+            HStack(spacing: 25) {
                 VStack(spacing: 4) {
                     Text("정복 던전").font(Font.caption).foregroundStyle(Color.secondary)
                     Text("45회").font(Font.system(size: 18, weight: .semibold)).foregroundStyle(Color.green)
@@ -42,7 +42,7 @@ struct AccountInfoCard: View {
                 
                 VStack(spacing: 4) {
                     Text("구독").font(Font.caption).foregroundStyle(Color.secondary)
-                    Text("15일 남음").font(Font.system(size: 18, weight: .semibold))
+                    Text("15일").font(Font.system(size: 18, weight: .semibold))
                     Text("남음").font(Font.caption2).foregroundStyle(Color.secondary)
                 }
             }
