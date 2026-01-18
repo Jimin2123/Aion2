@@ -46,15 +46,9 @@ struct CharacterView: View {
                                 tTicketRechargeIn: nil,
                                 totalIncome: 800_000
                             )
-//                            CharacterCard(
-//                                name: "캐릭터 1",
-//                                baseEnergy: 450,
-//                                maxBaseEnergy: 560,
-//                                chargedEnergy: 120,
-//                                cTicket: 15,
-//                                tTicket: 8,
-//                                totalIncome: 45_000_000
-//                            )
+                        }
+                        AddCharacterButton {
+                            print("캐릭터 추가")
                         }
                     }
                     Spacer(minLength: 20)
