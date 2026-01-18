@@ -56,7 +56,8 @@ struct CharacterView: View {
                 .padding(.vertical)
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("캐릭터 관리")
+            .navigationBarTitle("캐릭터 관리")
+            .navigationBarTitleDisplayMode(.inline)
         }
         
     }
