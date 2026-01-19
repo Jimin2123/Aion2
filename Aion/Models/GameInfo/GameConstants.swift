@@ -14,7 +14,9 @@ struct GameConstants {
     static let selentiumPrice: Int = 5000 // 셀렌티움 가격 (5000키나)
     static let membershipPrice: Int = 45_000 // 맴버쉽 구독 가격 (45000원)
     static let membershipEnergyPrice: Int = 100_000 // 멤버쉽 에너지 (10만 키나)
-    
+    static let exchange_reg_fee: Int = 2 // 거래소 등록 수수료 (2%)
+    static let world_exchange_tax: Int = 20 // 세계 거래소 세금 (20%)
+    static let local_exchange_tax: Int = 10 // 지역 거래소 세금 (10%)
     
     // MARK: - 오드에너지 제작, 구매 (횟수, 충전량)
     static let maxMembershipBuyEnergy: Int = 7 // 에너지 최대 구매 횟수
