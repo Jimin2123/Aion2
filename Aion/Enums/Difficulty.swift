@@ -5,7 +5,7 @@
 //  Created by 정지민 on 1/16/26.
 //
 
-enum Difficulty: Codable, Comparable {
+enum Difficulty: Codable, Comparable, Equatable {
     case none
     case normal
     case hard

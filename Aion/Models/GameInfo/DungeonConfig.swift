@@ -26,10 +26,14 @@ struct StageDetail {
 }
 
 // MARK: - 던전 구조체
-struct DungeonStage: Identifiable {
+struct DungeonStage: Identifiable, Equatable {
     let id: Int // ID
     let type: DungeonType // 던전 타입
     let name: String // 던전 이름 (예: 크라오)
     let stage: [StageDetail] // 던전 정보
     let estimatedSeconds: Int = 900// 소요 시간
+
+    static func == (lhs: DungeonStage, rhs: DungeonStage) -> Bool {
+        lhs.id == rhs.id
+    }
 }
