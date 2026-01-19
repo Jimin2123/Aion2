@@ -40,11 +40,11 @@ struct RewardSummarySection: View {
                 if isBusRide && busFeeValue > 0 {
                     Divider()
                     busFeeRow
-
-                    // 순수익
-                    Divider()
-                    netProfitRow
                 }
+
+                // 총 수익 (항상 표시)
+                Divider()
+                totalProfitRow
             }
             .background(.background)
             .cornerRadius(12)
@@ -147,11 +147,11 @@ struct RewardSummarySection: View {
         .padding(.vertical, 10)
     }
 
-    // MARK: - 순수익
-    private var netProfitRow: some View {
+    // MARK: - 총 수익
+    private var totalProfitRow: some View {
         HStack {
-            Text("순수익")
-                .font(.caption)
+            Text("총 수익")
+                .font(.subheadline)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
 

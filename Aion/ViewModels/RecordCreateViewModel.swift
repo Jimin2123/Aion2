@@ -26,7 +26,7 @@ class RecordCreateViewModel {
     var durationMinutes: String = ""
 
     // 거래소 옵션
-    var exchangeType: ExchangeType = .world
+    var exchangeType: ExchangeType = .local
     var exchangePrice: String = ""
     var exchangeItemName: String = ""
 

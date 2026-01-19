@@ -16,7 +16,7 @@ enum RecordType: String, CaseIterable {
         switch self {
         case .conquest: return .green
         case .transcendence: return .purple
-        case .exchange: return .pink
+        case .exchange: return .brown
         }
     }
 
