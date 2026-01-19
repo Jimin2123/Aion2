@@ -90,10 +90,11 @@ struct CalendarView: View {
         }.values.reduce(0, +)
     }
 
-    private var monthlyDungeonCount: Int {
+    private var monthlyPlaytimeMinutes: Int {
+        // 임시: 하루 평균 45분 플레이
         sampleIncomeData.filter { date, _ in
             calendar.isDate(date, equalTo: currentDate, toGranularity: .month)
-        }.count * 3 // 임시: 하루 평균 3개 던전
+        }.count * 45
     }
 
     private var bestIncomeDay: Date? {
@@ -189,7 +190,7 @@ struct CalendarView: View {
                         // 전체 통계 카드
                         MonthlyStatsCard(
                             totalIncome: monthlyTotal,
-                            dungeonCount: monthlyDungeonCount,
+                            totalPlaytimeMinutes: monthlyPlaytimeMinutes,
                             bestDay: bestIncomeDay,
                             bestDayIncome: bestDayIncome,
                             averageIncome: averageDailyIncome,
