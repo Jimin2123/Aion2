@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CharacterCard_V2: View {
+struct CharacterCard: View {
     let name: String
     let baseEnergy: Int
     let maxBaseEnergy: Int
@@ -158,7 +158,7 @@ struct CharacterCard_V2: View {
 
 #Preview {
     VStack {
-        CharacterCard_V2(
+        CharacterCard(
             name: "캐릭터 1",
             baseEnergy: 450,
             maxBaseEnergy: 560,
@@ -173,7 +173,7 @@ struct CharacterCard_V2: View {
             totalIncome: 450_000
         )
 
-        CharacterCard_V2(
+        CharacterCard(
             name: "캐릭터 2",
             baseEnergy: 680,
             maxBaseEnergy: 840,

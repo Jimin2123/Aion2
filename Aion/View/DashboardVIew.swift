@@ -21,7 +21,7 @@ struct DashboardView: View {
                             .padding(.horizontal)
 
                         VStack(spacing: 12) {
-                            CharacterCard_V2(
+                            CharacterCard(
                                 name: "캐릭터 1",
                                 baseEnergy: 450,
                                 maxBaseEnergy: 560,
@@ -36,7 +36,7 @@ struct DashboardView: View {
                                 totalIncome: 450_000
                             )
 
-                            CharacterCard_V2(
+                            CharacterCard(
                                 name: "캐릭터 2",
                                 baseEnergy: 680,
                                 maxBaseEnergy: 840,
