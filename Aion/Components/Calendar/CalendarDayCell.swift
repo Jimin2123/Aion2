@@ -37,6 +37,31 @@ struct CalendarDayCell: View {
         }
     }
 
+    private func formatCompactNumber(_ value: Int) -> String {
+        let absValue = abs(value)
+        let sign = value < 0 ? "-" : ""
+
+        switch absValue {
+        case 1_000_000_000...:
+            let formatted = Double(absValue) / 1_000_000_000
+            return sign + (formatted.truncatingRemainder(dividingBy: 1) == 0
+                ? "\(Int(formatted))B"
+                : String(format: "%.1fB", formatted))
+        case 1_000_000...:
+            let formatted = Double(absValue) / 1_000_000
+            return sign + (formatted.truncatingRemainder(dividingBy: 1) == 0
+                ? "\(Int(formatted))M"
+                : String(format: "%.1fM", formatted))
+        case 1_000...:
+            let formatted = Double(absValue) / 1_000
+            return sign + (formatted.truncatingRemainder(dividingBy: 1) == 0
+                ? "\(Int(formatted))K"
+                : String(format: "%.1fK", formatted))
+        default:
+            return sign + "\(absValue)"
+        }
+    }
+
     var body: some View {
         Button(action: onTap) {
             VStack(spacing: 6) {
@@ -51,10 +76,10 @@ struct CalendarDayCell: View {
                     )
 
                 // 수익 정보
-                if let income = income, income > 0 {
-                    Text("\(income / 1_000_000)M")
+                if let income = income, income != 0 {
+                    Text(formatCompactNumber(income))
                         .font(.system(size: 10, weight: .medium))
-                        .foregroundStyle(.orange)
+                        .foregroundStyle(income > 0 ? .orange : .red)
                 } else if hasRecord {
                     Circle()
                         .fill(Color.green)
