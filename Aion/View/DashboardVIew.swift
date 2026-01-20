@@ -8,48 +8,43 @@
 import SwiftUI
 
 struct DashboardView: View {
+    @State private var viewModel = DashboardViewModel()
+
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
                     IncomeSummaryCard()
-                    
+
                     // 캐릭터별 에너지/티켓 현황
                     VStack(alignment: .leading, spacing: 12) {
                         Text("캐릭터 현황")
                             .font(.headline)
                             .padding(.horizontal)
 
-                        VStack(spacing: 12) {
-                            CharacterCard(
-                                name: "캐릭터 1",
-                                baseEnergy: 450,
-                                maxBaseEnergy: 560,
-                                chargedEnergy: 120,
-                                cTicket: 15,
-                                chargedCTicket: 3,
-                                tTicket: 8,
-                                chargedTTicket: 2,
-                                energyRechargeIn: 45,
-                                cTicketRechargeIn: 180,
-                                tTicketRechargeIn: 420,
-                                totalIncome: 450_000
-                            )
-
-                            CharacterCard(
-                                name: "캐릭터 2",
-                                baseEnergy: 680,
-                                maxBaseEnergy: 840,
-                                chargedEnergy: 0,
-                                cTicket: 21,
-                                chargedCTicket: 0,
-                                tTicket: 14,
-                                chargedTTicket: 0,
-                                energyRechargeIn: nil,
-                                cTicketRechargeIn: nil,
-                                tTicketRechargeIn: nil,
-                                totalIncome: 800_000
-                            )
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                        } else {
+                            VStack(spacing: 12) {
+                                ForEach(viewModel.characters) { character in
+                                    CharacterCard(
+                                        name: character.name,
+                                        baseEnergy: character.baseEnergy,
+                                        maxBaseEnergy: character.maxBaseEnergy,
+                                        chargedEnergy: character.chargedEnergy,
+                                        cTicket: character.cTicket,
+                                        chargedCTicket: character.chargedCTicket,
+                                        tTicket: character.tTicket,
+                                        chargedTTicket: character.chargedTTicket,
+                                        energyRechargeIn: character.energyRechargeIn,
+                                        cTicketRechargeIn: character.cTicketRechargeIn,
+                                        tTicketRechargeIn: character.tTicketRechargeIn,
+                                        totalIncome: character.totalIncome
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -57,6 +52,9 @@ struct DashboardView: View {
             .background(Color(.systemGroupedBackground))
             .navigationTitle("대시보드")
             .navigationBarTitleDisplayMode(.inline)
+            .refreshable {
+                viewModel.refresh()
+            }
         }
     }
 }
