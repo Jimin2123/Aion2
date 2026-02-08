@@ -152,8 +152,8 @@ struct ResourceRow: View {
     }
 
     var body: some View {
-        HStack(spacing: 8) {
-            // 아이콘 + 라벨
+        VStack(alignment: .leading, spacing: 6) {
+            // 아이콘 + 라벨 + 수치
             HStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.caption)
@@ -162,8 +162,21 @@ struct ResourceRow: View {
                 Text(label)
                     .font(.caption)
                     .foregroundStyle(.primary)
+
+                Spacer()
+
+                HStack(spacing: 2) {
+                    Text("\(current)/\(max)")
+                        .font(.caption)
+                        .foregroundStyle(.primary)
+
+                    if charged > 0 {
+                        Text("+\(charged)")
+                            .font(.caption)
+                            .foregroundStyle(.blue)
+                    }
+                }
             }
-            .frame(width: 50, alignment: .leading)
 
             // 프로그레스 바
             GeometryReader { geometry in
@@ -177,20 +190,6 @@ struct ResourceRow: View {
                 }
             }
             .frame(height: 8)
-
-            // 수치
-            HStack(spacing: 2) {
-                Text("\(current)/\(max)")
-                    .font(.caption)
-                    .foregroundStyle(.primary)
-
-                if charged > 0 {
-                    Text("+\(charged)")
-                        .font(.caption)
-                        .foregroundStyle(.blue)
-                }
-            }
-            .frame(minWidth: 70, alignment: .trailing)
         }
     }
 }
