@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CalendarView: View {
+    var initialCharacter: String?
     @State private var viewModel = CalendarViewModel()
 
     var body: some View {
@@ -102,6 +103,11 @@ struct CalendarView: View {
             }
             .refreshable {
                 viewModel.refresh()
+            }
+            .onAppear {
+                if let name = initialCharacter {
+                    viewModel.selectedCharacter = name
+                }
             }
         }
     }
