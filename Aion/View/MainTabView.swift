@@ -13,7 +13,8 @@ struct MainTabView: View {
     private let tabs: [(icon: String, label: String)] = [
         ("house.fill", "홈"),
         ("calendar", "캘린더"),
-        ("person.2.fill", "캐릭터")
+        ("person.2.fill", "캐릭터"),
+        ("gearshape.fill", "설정")
     ]
 
     var body: some View {
@@ -24,6 +25,7 @@ struct MainTabView: View {
                 case 0: DashboardView()
                 case 1: CalendarView()
                 case 2: CharacterView()
+                case 3: SettingsView()
                 default: DashboardView()
                 }
             }
