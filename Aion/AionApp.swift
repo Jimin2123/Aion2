@@ -14,7 +14,7 @@ struct AionApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            SplashView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
