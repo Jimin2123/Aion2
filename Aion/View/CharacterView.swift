@@ -11,7 +11,7 @@ struct CharacterView: View {
     @State private var viewModel = CharacterViewModel()
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
                     AccountInfoCard()
@@ -28,20 +28,23 @@ struct CharacterView: View {
                         } else {
                             VStack(spacing: 12) {
                                 ForEach(viewModel.characters) { character in
-                                    CharacterCard(
-                                        name: character.name,
-                                        baseEnergy: character.baseEnergy,
-                                        maxBaseEnergy: character.maxBaseEnergy,
-                                        chargedEnergy: character.chargedEnergy,
-                                        cTicket: character.cTicket,
-                                        chargedCTicket: character.chargedCTicket,
-                                        tTicket: character.tTicket,
-                                        chargedTTicket: character.chargedTTicket,
-                                        energyRechargeIn: character.energyRechargeIn,
-                                        cTicketRechargeIn: character.cTicketRechargeIn,
-                                        tTicketRechargeIn: character.tTicketRechargeIn,
-                                        totalIncome: character.totalIncome
-                                    )
+                                    NavigationLink(value: character) {
+                                        CharacterCard(
+                                            name: character.name,
+                                            baseEnergy: character.baseEnergy,
+                                            maxBaseEnergy: character.maxBaseEnergy,
+                                            chargedEnergy: character.chargedEnergy,
+                                            cTicket: character.cTicket,
+                                            chargedCTicket: character.chargedCTicket,
+                                            tTicket: character.tTicket,
+                                            chargedTTicket: character.chargedTTicket,
+                                            energyRechargeIn: character.energyRechargeIn,
+                                            cTicketRechargeIn: character.cTicketRechargeIn,
+                                            tTicketRechargeIn: character.tTicketRechargeIn,
+                                            totalIncome: character.totalIncome
+                                        )
+                                    }
+                                    .buttonStyle(.plain)
                                 }
                             }
 
@@ -59,6 +62,9 @@ struct CharacterView: View {
             .navigationBarTitleDisplayMode(.inline)
             .refreshable {
                 viewModel.refresh()
+            }
+            .navigationDestination(for: CharacterStatus.self) { character in
+                CharacterDetailView(character: character)
             }
             .sheet(isPresented: $viewModel.showAddCharacterSheet) {
                 AddCharacterSheet(viewModel: viewModel)
