@@ -67,39 +67,6 @@ struct CharacterView: View {
     }
 }
 
-// MARK: - Add Character Sheet
-
-struct AddCharacterSheet: View {
-    @Bindable var viewModel: CharacterViewModel
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        NavigationView {
-            Form {
-                Section("캐릭터 정보") {
-                    TextField("캐릭터 이름", text: $viewModel.newCharacterName)
-                }
-            }
-            .navigationTitle("캐릭터 추가")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("취소") {
-                        viewModel.newCharacterName = ""
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("저장") {
-                        viewModel.saveNewCharacter()
-                    }
-                    .disabled(viewModel.newCharacterName.isEmpty)
-                }
-            }
-        }
-    }
-}
-
 #Preview {
     CharacterView()
 }

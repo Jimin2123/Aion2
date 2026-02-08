@@ -43,7 +43,15 @@ class CharacterViewModel {
     var errorMessage: String?
 
     var showAddCharacterSheet = false
+
+    // 새 캐릭터 입력 필드
     var newCharacterName = ""
+    var newBaseEnergy = ""
+    var newChargedEnergy = ""
+    var newCTicket = ""
+    var newChargedCTicket = ""
+    var newTTicket = ""
+    var newChargedTTicket = ""
 
     init() {
         loadData()
@@ -57,6 +65,30 @@ class CharacterViewModel {
 
     var totalIncome: Int {
         characters.reduce(0) { $0 + $1.totalIncome }
+    }
+
+    var maxEnergy: Int {
+        account?.isSubscribed == true ? 840 : 560
+    }
+
+    static let maxCTicket = 21
+    static let maxTTicket = 14
+
+    // MARK: - Input Validation
+
+    func validateBaseEnergy(_ value: String) {
+        guard let intValue = Int(value), intValue > maxEnergy else { return }
+        newBaseEnergy = String(maxEnergy)
+    }
+
+    func validateCTicket(_ value: String) {
+        guard let intValue = Int(value), intValue > Self.maxCTicket else { return }
+        newCTicket = String(Self.maxCTicket)
+    }
+
+    func validateTTicket(_ value: String) {
+        guard let intValue = Int(value), intValue > Self.maxTTicket else { return }
+        newTTicket = String(Self.maxTTicket)
     }
 
     // MARK: - Actions
@@ -121,16 +153,18 @@ class CharacterViewModel {
     func saveNewCharacter() {
         guard !newCharacterName.isEmpty else { return }
 
+        let maxEnergy = account?.isSubscribed == true ? 840 : 560
+
         // TODO: 실제 저장 로직 구현
         let newCharacter = CharacterStatus(
             name: newCharacterName,
-            baseEnergy: 0,
-            maxBaseEnergy: account?.isSubscribed == true ? 840 : 560,
-            chargedEnergy: 0,
-            cTicket: 21,
-            chargedCTicket: 0,
-            tTicket: 14,
-            chargedTTicket: 0,
+            baseEnergy: Int(newBaseEnergy) ?? maxEnergy,
+            maxBaseEnergy: maxEnergy,
+            chargedEnergy: Int(newChargedEnergy) ?? 0,
+            cTicket: Int(newCTicket) ?? 21,
+            chargedCTicket: Int(newChargedCTicket) ?? 0,
+            tTicket: Int(newTTicket) ?? 14,
+            chargedTTicket: Int(newChargedTTicket) ?? 0,
             energyRechargeIn: nil,
             cTicketRechargeIn: nil,
             tTicketRechargeIn: nil,
@@ -138,8 +172,18 @@ class CharacterViewModel {
         )
 
         characters.append(newCharacter)
-        newCharacterName = ""
+        resetNewCharacterFields()
         showAddCharacterSheet = false
+    }
+
+    func resetNewCharacterFields() {
+        newCharacterName = ""
+        newBaseEnergy = ""
+        newChargedEnergy = ""
+        newCTicket = ""
+        newChargedCTicket = ""
+        newTTicket = ""
+        newChargedTTicket = ""
     }
 
     func deleteCharacter(at indexSet: IndexSet) {
