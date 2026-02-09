@@ -9,11 +9,21 @@ import SwiftUI
 
 struct MonthlyStatsCard: View {
     let totalIncome: Int
-    let dungeonCount: Int
+    let totalPlaytimeMinutes: Int
     let bestDay: Date?
     let bestDayIncome: Int
     let averageIncome: Int
     let characterStats: [(name: String, income: Int)]
+
+    private var playtimeString: String {
+        let hours = totalPlaytimeMinutes / 60
+        let minutes = totalPlaytimeMinutes % 60
+        if hours > 0 {
+            return "\(hours)시간 \(minutes)분"
+        } else {
+            return "\(minutes)분"
+        }
+    }
 
     var body: some View {
         VStack(spacing: 16) {
@@ -30,12 +40,12 @@ struct MonthlyStatsCard: View {
                 }
                 Spacer()
 
-                // 던전 횟수
+                // 플레이타임
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text("던전")
+                    Text("플레이타임")
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                    Text("\(dungeonCount)회")
+                    Text(playtimeString)
                         .font(.subheadline)
                         .fontWeight(.semibold)
                 }
@@ -191,7 +201,7 @@ struct CharacterIncomeRow: View {
 
         MonthlyStatsCard(
             totalIncome: 156_000_000,
-            dungeonCount: 45,
+            totalPlaytimeMinutes: 725, // 12시간 5분
             bestDay: Date(),
             bestDayIncome: 18_500_000,
             averageIncome: 10_400_000,
